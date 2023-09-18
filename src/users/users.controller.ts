@@ -1,7 +1,9 @@
-import { Controller, Get, Param, Post, Body} from '@nestjs/common';
+import { Controller, Get, Param, Request, Post, Body, UseGuards} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { ApiBody, ApiProperty, ApiTags } from '@nestjs/swagger';
-
+import { JwtAuthGuard } from 'src/auth/jwt.guard';
+import { RoleGuard } from 'src/auth/role/role.guard';
+import { Roles } from "src/auth/roles/roles.decorator"
 
 export class userdto {
     @ApiProperty()
@@ -15,6 +17,9 @@ export class userdto {
 @Controller('users')
 export class UsersController {
     constructor(private readonly usersService: UsersService){}
+    
+    @Roles('admin')
+    @UseGuards(JwtAuthGuard, RoleGuard)
     @Get("")
     async name() {
         return this.usersService.getAll()
