@@ -1,4 +1,14 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
+import { ApiProperty } from '@nestjs/swagger';
+import { sign } from 'jsonwebtoken';
+
+export class userdto {
+    @ApiProperty()
+    username: string
+
+    @ApiProperty()
+    password: string
+}
 
 @Injectable()
 export class AuthService {
@@ -7,20 +17,21 @@ export class AuthService {
       userId: 1,
       username: 'john',
       password: 'changeme',
+      role: "admin",
     },
     {
       userId: 2,
       username: 'maria',
       password: 'guess',
+      role: "user"
     },
   ];
-  async login(data){
+  async validate(data: userdto){
     const user = this.users.find((user) => user.username == data.username)
     if (user && data.password == user.password){
-        return {
-            status: HttpStatus.OK,
-            data: user
-        }
+      const token = sign({...user}, 'secrete')
+      return {token, user}
     }
+    throw new UnauthorizedException()
   }
 }
