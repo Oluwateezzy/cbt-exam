@@ -1,33 +1,18 @@
-import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
-import { ApiProperty } from '@nestjs/swagger';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { sign } from 'jsonwebtoken';
-
-export class userdto {
-    @ApiProperty()
-    username: string
-
-    @ApiProperty()
-    password: string
-}
+import { User } from '@prisma/client'
+import { PrimaService } from 'src/prima/prima.service';
+import { userdto } from './dto/user.dto';
 
 @Injectable()
 export class AuthService {
-    private readonly users = [
-    {
-      userId: 1,
-      username: 'john',
-      password: 'changeme',
-      role: "admin",
-    },
-    {
-      userId: 2,
-      username: 'maria',
-      password: 'guess',
-      role: "user"
-    },
-  ];
+  constructor(private prisma: PrimaService){}
   async validate(data: userdto){
-    const user = this.users.find((user) => user.username == data.username)
+    const user = await this.prisma.user.findUnique({
+      where: {
+        username: data.username
+      }
+    })
     if (user && data.password == user.password){
       const token = sign({...user}, 'secrete')
       return {token, user}

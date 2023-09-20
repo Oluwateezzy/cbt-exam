@@ -1,42 +1,33 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { PrimaService } from 'src/prima/prima.service';
 
 @Injectable()
 export class UsersService {
-    private readonly users = [
-    {
-      userId: 1,
-      username: 'john',
-      password: 'changeme',
-    },
-    {
-      userId: 2,
-      username: 'maria',
-      password: 'guess',
-    },
-  ];
+  constructor(private readonly prisma: PrimaService){}
   
   async getAll(){
-    return await this.users
+    return await this.prisma.user.findMany({})
   }
   
   async getOne(id: number){
-    const getuser = await this.users.find((user) => {
-        return user.userId == id
+    const user = await this.prisma.user.findUnique({
+      where: {id}
     })
-    if (!getuser){
+    if (!user){
         throw new HttpException("user not found", HttpStatus.NOT_FOUND)
     }else{
         return {
             status: HttpStatus.OK,
-            data: getuser
+            data: user
         }
     }
   }
 
   async create(data){
-    const user = this.users.push(data)
+    const user = await this.prisma.user.create({data})
     return {
-        status: HttpStatus.OK
+        status: HttpStatus.CREATED,
+        data: user
     }
   }
 }
