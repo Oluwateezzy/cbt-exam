@@ -15,11 +15,10 @@ export class UsersService {
     })
     if (!user){
         throw new HttpException("user not found", HttpStatus.NOT_FOUND)
-    }else{
-        return {
-            status: HttpStatus.OK,
-            data: user
-        }
+    }
+    return {
+      status: HttpStatus.OK,
+      data: user
     }
   }
 

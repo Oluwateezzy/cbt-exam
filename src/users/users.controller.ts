@@ -27,7 +27,7 @@ export class UsersController {
 
     @Get(":id")
     async getOne(@Param('id') id: number){
-        return this.usersService.getOne(id)
+        return this.usersService.getOne(Number(id))
     }
 
     @Post("")
