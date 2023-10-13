@@ -14,9 +14,9 @@ CREATE TABLE "User" (
     "username" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "role" "Role" NOT NULL DEFAULT 'STUDENT',
-    "createdAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "examName" "ExamName" NOT NULL,
+    "examName" "ExamName",
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -77,7 +77,7 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "Exam_name_key" ON "Exam"("name");
 
 -- AddForeignKey
-ALTER TABLE "User" ADD CONSTRAINT "User_examName_fkey" FOREIGN KEY ("examName") REFERENCES "Exam"("name") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "User" ADD CONSTRAINT "User_examName_fkey" FOREIGN KEY ("examName") REFERENCES "Exam"("name") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Course" ADD CONSTRAINT "Course_examId_fkey" FOREIGN KEY ("examId") REFERENCES "Exam"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

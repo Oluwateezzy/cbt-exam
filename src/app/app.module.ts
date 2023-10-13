@@ -10,6 +10,8 @@ import { CourseModule } from 'src/course/course.module';
 import { ExamModule } from 'src/exam/exam.module';
 import { OptionModule } from 'src/option/option.module';
 import { QuestionModule } from 'src/question/question.module';
+import { PrimaService } from '../prima/prima.service';
+import { PrimaModule } from 'src/prima/prima.module';
 
 @Module({
   imports: [
@@ -20,9 +22,10 @@ import { QuestionModule } from 'src/question/question.module';
     CourseModule,
     ExamModule,
     OptionModule,
-    QuestionModule
+    QuestionModule,
+    PrimaModule
   ],
   controllers: [AppController,],
-  providers: [AppService, JwtStrategy]
+  providers: [AppService, JwtStrategy, PrimaService]
 })
 export class AppModule {}

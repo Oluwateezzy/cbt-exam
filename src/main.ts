@@ -9,7 +9,8 @@ async function bootstrap() {
     .setTitle("Computer Based Test")
     .setDescription("A computer based test api")
     .setVersion("1.0")
-    .addBearerAuth()
+    .addBearerAuth({ type: 'http', scheme: 'bearer', bearerFormat: 'JWT' },
+      'JWT',)
     .build();
     const document = SwaggerModule.createDocument(app, config)
     SwaggerModule.setup("api", app, document)

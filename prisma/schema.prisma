@@ -16,10 +16,10 @@ model User {
   username  String
   password  String
   role      Role     @default(STUDENT)
-  createdAt DateTime
+  createdAt DateTime @default(now()) 
   updatedAt DateTime @updatedAt
-  examName  ExamName
-  exam Exam @relation(fields: [examName], references: [name])
+  examName  ExamName?
+  exam Exam? @relation(fields: [examName], references: [name])
 }
 
 model Exam {

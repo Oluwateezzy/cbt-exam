@@ -1,9 +1,10 @@
 import { Controller, Post, Get, Put, Delete, Body, Param } from '@nestjs/common';
 import { ExamService } from './exam.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateExamDto, UpdateExamDto } from './exam.dto';
 
 @ApiTags('Exam Module')
+@ApiBearerAuth('jwt')
 @Controller('exam')
 export class ExamController {
     constructor(private examService: ExamService){}

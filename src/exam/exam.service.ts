@@ -38,7 +38,7 @@ export class ExamService {
                 }
             })
             if (!exam) {
-                throw new HttpException('User not found', HttpStatus.NOT_ACCEPTABLE)
+                throw new HttpException('User not found', HttpStatus.NOT_FOUND)
             }
             return {
                 status: HttpStatus.OK,
@@ -56,7 +56,7 @@ export class ExamService {
                 }
             })
             if (!exam) {
-                throw new HttpException('User not found', HttpStatus.NOT_ACCEPTABLE)
+                throw new HttpException('User not found', HttpStatus.NOT_FOUND)
             }
             const result = await this.prisma.exam.update({
                 where: {
@@ -68,9 +68,31 @@ export class ExamService {
                 status: HttpStatus.OK,
                 data: result
             }
+        } catch (err) {
+            throw new HttpException(`${err.message}`, HttpStatus.BAD_REQUEST)
+        }
+    }
+    async delete(id){
+        try {
+            const exam = await this.prisma.exam.findUnique({
+                where: {
+                    id
+                }
+            })
+            if (!exam) {
+                throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+            }
+            await this.prisma.exam.delete({
+                where: {
+                    id
+                }
+            })
+            return {
+                status: HttpStatus.OK,
+                data: {}
+            }
         } catch (error) {
             
         }
     }
-    async delete(id){}
 }

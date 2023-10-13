@@ -2,13 +2,13 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { sign } from 'jsonwebtoken';
 import { User } from '@prisma/client'
 import { PrimaService } from 'src/prima/prima.service';
-import { CreateUserDto } from 'src/users/user.dto';
+import { userdto } from './dto/user.dto';
 
 
 @Injectable()
 export class AuthService {
   constructor(private prisma: PrimaService){}
-  async validate(data: CreateUserDto){
+  async validate(data: userdto){
     const user = await this.prisma.user.findUnique({
       where: {
         email: data.email
