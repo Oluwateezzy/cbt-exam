@@ -12,6 +12,8 @@ import { OptionModule } from 'src/option/option.module';
 import { QuestionModule } from 'src/question/question.module';
 import { PrimaService } from '../prima/prima.service';
 import { PrimaModule } from 'src/prima/prima.module';
+import { AuthService } from '../auth/auth.service';
+import { UsersService } from '../users/users.service';
 
 @Module({
   imports: [
@@ -26,6 +28,6 @@ import { PrimaModule } from 'src/prima/prima.module';
     PrimaModule
   ],
   controllers: [AppController,],
-  providers: [AppService, JwtStrategy, PrimaService]
+  providers: [AppService, JwtStrategy, PrimaService, AuthService, UsersService]
 })
 export class AppModule {}

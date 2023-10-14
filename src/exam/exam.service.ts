@@ -91,8 +91,8 @@ export class ExamService {
                 status: HttpStatus.OK,
                 data: {}
             }
-        } catch (error) {
-            
+        } catch (err) {
+            throw new HttpException(`${err.message}`, HttpStatus.BAD_REQUEST)
         }
     }
 }

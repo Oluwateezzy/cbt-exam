@@ -4,8 +4,8 @@ import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateExamDto, UpdateExamDto } from './exam.dto';
 
 @ApiTags('Exam Module')
-@ApiBearerAuth('jwt')
 @Controller('exam')
+@ApiBearerAuth('JWT')
 export class ExamController {
     constructor(private examService: ExamService){}
     @Post('')
