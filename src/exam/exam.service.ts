@@ -21,7 +21,7 @@ export class ExamService {
     }
     async findAll(){
         try {
-            const exams = await this.prisma.exam.findMany()
+            const exams = await this.prisma.exam.findMany({})
             return {
                 status: HttpStatus.OK,
                 data: exams
@@ -38,7 +38,7 @@ export class ExamService {
                 }
             })
             if (!exam) {
-                throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+                throw new HttpException('Exam not found', HttpStatus.NOT_FOUND)
             }
             return {
                 status: HttpStatus.OK,
@@ -56,7 +56,7 @@ export class ExamService {
                 }
             })
             if (!exam) {
-                throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+                throw new HttpException('Exam not found', HttpStatus.NOT_FOUND)
             }
             const result = await this.prisma.exam.update({
                 where: {
@@ -80,7 +80,7 @@ export class ExamService {
                 }
             })
             if (!exam) {
-                throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+                throw new HttpException('Exam not found', HttpStatus.NOT_FOUND)
             }
             await this.prisma.exam.delete({
                 where: {

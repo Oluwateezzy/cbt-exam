@@ -14,7 +14,7 @@ export class ExamController {
     }
     @Get('')
     async findAll(){
-        return this.findAll()
+        return this.examService.findAll()
     }
     @Get(':id')
     async findOne(@Param('id') id: string){

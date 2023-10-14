@@ -52,7 +52,6 @@ model Question {
   courseId String
   course Course @relation(fields: [courseId], references: [id])
   options Option[]
-  examId        String
 }
 
 model Option {
