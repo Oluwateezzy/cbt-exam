@@ -1,13 +1,12 @@
 // src/exams/dto/exam.dto.ts
 
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { ExamName } from '@prisma/client';
 import { IsString, IsOptional, IsInt, Min, IsDate, IsArray, ArrayNotEmpty } from 'class-validator';
 
 export class CreateExamDto {
     @ApiProperty()
     @IsString()
-    name: ExamName;
+    name: string;
 
     @ApiProperty()
     @IsString()

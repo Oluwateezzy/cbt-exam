@@ -11,15 +11,16 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
+  id        String     @id @default(uuid())
+  email     String     @unique
   username  String
   password  String
   examName  String?
   courses   String[]
-  role      Role     @default(STUDENT)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  role      Role       @default(STUDENT)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Response  Response[]
 }
 
 model Exam {
@@ -35,7 +36,7 @@ model Exam {
 
 model Course {
   id          String     @id @default(uuid())
-  name        String
+  name        String @unique
   description String?
   examId      String
   exam        Exam       @relation(fields: [examId], references: [name])
@@ -49,16 +50,23 @@ model Question {
   question      String
   point         Int?
   correctAnswer options
-  courseId      String
-  course        Course     @relation(fields: [courseId], references: [id])
+  courseName      String
+  course        Course     @relation(fields: [courseName], references: [name])
   options       Option[]
   Response      Response[]
 }
 
 model Response {
   id         String   @id @default(uuid())
+  examName   String
+  courseName String
+  answer     options
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
   questionId String
   question   Question @relation(fields: [questionId], references: [id])
+  submitedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Option {
