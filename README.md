@@ -42,7 +42,7 @@ Before you begin, ensure you have met the following requirements:
 1. Clone the repository:
 
    ```sh
-   git clone [<repository-url>](https://github.com/Oluwateezzy/cbt-exam.git)
+   git clone https://github.com/Oluwateezzy/cbt-exam.git
    cd cbt-exam
 2. Install the project dependencies:
 
