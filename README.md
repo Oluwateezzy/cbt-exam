@@ -45,5 +45,7 @@ Before you begin, ensure you have met the following requirements:
    git clone <repository-url>
    cd computer-based-exam-service
 2. Install the project dependencies:
+
+   ```sh
    npm install
 4. 
