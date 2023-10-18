@@ -15,61 +15,60 @@ model User {
   email     String   @unique
   username  String
   password  String
+  examName  String?
+  courses   String[]
   role      Role     @default(STUDENT)
-  createdAt DateTime @default(now()) 
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  examName  ExamName?
-  exam Exam? @relation(fields: [examName], references: [name])
 }
 
 model Exam {
   id          String   @id @default(uuid())
-  name        ExamName @default(LEVEL100) @unique
+  name        String   @unique
   title       String
   description String?
   maxScore    Int?
-  courses Course[]
+  courses     Course[]
   startDate   DateTime
   endDate     DateTime
-  users User[]
 }
+
 model Course {
-  id           String   @id @default(uuid())
-  name         String
-  description  String?
-  examId String
-  exam Exam @relation(fields: [examId], references: [id])
-  questions Question[]
-  startDate    DateTime
-  endDate      DateTime
+  id          String     @id @default(uuid())
+  name        String
+  description String?
+  examId      String
+  exam        Exam       @relation(fields: [examId], references: [name])
+  questions   Question[]
+  startDate   DateTime
+  endDate     DateTime
 }
 
 model Question {
-  id            String   @id @default(uuid())
+  id            String     @id @default(uuid())
   question      String
   point         Int?
   correctAnswer options
-  courseId String
-  course Course @relation(fields: [courseId], references: [id])
-  options Option[]
+  courseId      String
+  course        Course     @relation(fields: [courseId], references: [id])
+  options       Option[]
+  Response      Response[]
+}
+
+model Response {
+  id         String   @id @default(uuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id])
 }
 
 model Option {
-  id       String     @id @default(uuid())
-  A        String
-  B        String
-  C        String
-  D        String?
+  id         String   @id @default(uuid())
+  A          String
+  B          String
+  C          String
+  D          String?
   questionId String
-  question Question @relation(fields: [questionId], references: [id])
-}
-
-enum ExamName {
-  LEVEL100
-  LEVEL200
-  LEVEL300
-  LEVEL400
-
+  question   Question @relation(fields: [questionId], references: [id])
 }
 
 enum options {
