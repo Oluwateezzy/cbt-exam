@@ -41,6 +41,15 @@ export class UsersController {
         return this.usersService.getOne(id)
     }
 
+    @Get("/score/:id")
+    @HttpCode(HttpStatus.OK)
+    @ApiOkResponse({ description: "Get User's Score" })
+    @Roles(Role.STUDENT, Role.ADMIN)
+    @UseGuards(JwtAuthGuard, RoleGuard)
+    async score(@Param('id') id: string) {
+        return this.usersService.score(id)
+    }
+
     @Put(":id")
     @HttpCode(HttpStatus.OK)
     @ApiOkResponse({ description: 'Update User' })

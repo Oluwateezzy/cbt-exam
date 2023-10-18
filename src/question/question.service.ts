@@ -19,7 +19,12 @@ export class QuestionService {
     }
     async findAll() {
         try {
-            const questions = await this.prisma.question.findMany({})
+            const questions = await this.prisma.question.findMany({
+                include: {
+                    options: true,
+                    Response: true
+                }
+            })
             return {
                 status: HttpStatus.OK,
                 data: questions
@@ -33,6 +38,10 @@ export class QuestionService {
             const question = await this.prisma.question.findUnique({
                 where: {
                     id
+                },
+                include: {
+                    options: true,
+                    Response: true
                 }
             })
             if (!question) {

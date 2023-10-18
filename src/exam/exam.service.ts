@@ -21,7 +21,11 @@ export class ExamService {
     }
     async findAll(){
         try {
-            const exams = await this.prisma.exam.findMany({})
+            const exams = await this.prisma.exam.findMany({
+                include: {
+                    courses: true
+                }
+            })
             return {
                 status: HttpStatus.OK,
                 data: exams
@@ -35,6 +39,9 @@ export class ExamService {
             const exam = await this.prisma.exam.findUnique({
                 where: {
                     id
+                },
+                include: {
+                    courses: true
                 }
             })
             if (!exam) {

@@ -12,9 +12,9 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Post("auth/login")
-    @UseGuards(AuthGuard('local'))
-    async login(@Request() req){
-        return req
-    }
+  // @Post("auth/login")
+  //   @UseGuards(AuthGuard('local'))
+  //   async login(@Request() req){
+  //       return req
+  //   }
 }
