@@ -48,4 +48,26 @@ Before you begin, ensure you have met the following requirements:
 
    ```sh
    npm install
-4. 
+3. Set up your environment variables. Create a .env file in the project root and configure your database connection details and other environment-specific settings.
+4. Run database migrations to create the database tables:
+   ```sh
+   npx prisma migrate dev
+5. Start the development server:
+   ```sh
+   npm run start:dev
+The service should now be running on http://localhost:3000 by default.
+
+### Usage
+You can access the API documentation at /api/docs to learn about available endpoints and how to use them.
+
+### API Documentation
+API documentation is available in the Swagger UI interface. You can access it by navigating to /api in your web browser.
+
+### Authors
+- Oluwafunmilayo Oluwatobiloba
+
+### Contributing
+We welcome contributions from the community.
+
+## License
+Nest is [MIT licensed](LICENSE).
