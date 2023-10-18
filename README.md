@@ -64,7 +64,7 @@ You can access the API documentation at /api/docs to learn about available endpo
 API documentation is available in the Swagger UI interface. You can access it by navigating to /api in your web browser.
 
 ### Authors
-- Oluwafunmilayo Oluwatobiloba
+- [Oluwafunmilayo Oluwatobiloba](https://github.com/oluwateezzy)
 
 ### Contributing
 We welcome contributions from the community.
