@@ -16,7 +16,8 @@ model User {
   username  String
   password  String
   examName  String?
-  courses   String[]
+  isCompleted Boolean @default(false)
+  courses  Course[]   @relation("Enrollments")
   role      Role       @default(STUDENT)
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
@@ -38,9 +39,11 @@ model Course {
   id          String     @id @default(uuid())
   name        String @unique
   description String?
+  totalScore  Int @default(100)
   examId      String
   exam        Exam       @relation(fields: [examId], references: [name])
   questions   Question[]
+  students User[]     @relation("Enrollments")
   startDate   DateTime
   endDate     DateTime
 }
@@ -48,7 +51,7 @@ model Course {
 model Question {
   id            String     @id @default(uuid())
   question      String
-  point         Int?
+  point         Int @default(10)
   correctAnswer options
   courseName      String
   course        Course     @relation(fields: [courseName], references: [name])
