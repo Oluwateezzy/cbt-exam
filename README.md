@@ -51,8 +51,11 @@ Before you begin, ensure you have met the following requirements:
 3. Set up your environment variables. Create a .env file in the project root and configure your database connection details and other environment-specific settings.
 4. Run database migrations to create the database tables:
    ```sh
-   npx prisma migrate dev
-5. Start the development server:
+   npm run migrate
+5. Seed the database
+   ```sh
+   npm run seed
+6. Start the development server:
    ```sh
    npm run start:dev
 The service should now be running on http://localhost:3000 by default.
