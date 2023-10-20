@@ -7,7 +7,7 @@ export class OptionService {
     async create(data) {
         try {
             const option = await this.prisma.option.create({
-                ...data
+                data: {...data}
             })
             return {
                 status: HttpStatus.CREATED,

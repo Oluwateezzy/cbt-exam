@@ -47,7 +47,7 @@ export class AuthService {
           password,
           role,
           examName,
-          courses
+          courses: courses ? courses : []
         }
       })
       return {

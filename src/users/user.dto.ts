@@ -45,10 +45,10 @@ export class RegisterUserDto {
 
     @ApiProperty()
     @IsString()
-    examName: string;
+    examName?: string;
 
     @ApiProperty()
-    courses: string[];
+    courses?: string[];
 
 }
 

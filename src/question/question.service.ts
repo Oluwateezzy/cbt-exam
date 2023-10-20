@@ -7,7 +7,7 @@ export class QuestionService {
     async create(data) {
         try {
             const question = await this.prisma.question.create({
-                ...data
+                data: {...data}
             })
             return {
                 status: HttpStatus.CREATED,

@@ -20,7 +20,7 @@ export class CreateQuestionDto {
 
     @ApiProperty()
     @IsUUID()
-    courseId: string;
+    courseName: string;
 }
 
 export class UpdateQuestionDto extends PartialType(CreateQuestionDto) {}

@@ -9,7 +9,7 @@ export class ExamService {
     async create(data){
         try {
             const exam = await this.prisma.exam.create({
-                ...data
+                data: {...data}
             })
             return {
                 status: HttpStatus.CREATED,
