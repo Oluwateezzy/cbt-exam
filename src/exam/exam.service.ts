@@ -41,7 +41,8 @@ export class ExamService {
                     id
                 },
                 include: {
-                    courses: true
+                    courses: true,
+                    user: true
                 }
             })
             if (!exam) {

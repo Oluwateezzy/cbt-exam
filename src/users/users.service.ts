@@ -23,6 +23,8 @@ export class UsersService {
     try {
       return await this.prisma.user.findMany({
         include: {
+          examName: true,
+          courses: true,
           Response: true
         }
       })
@@ -86,6 +88,7 @@ export class UsersService {
 
   async update(id: string, data: UpdateUserDto){
     try {
+      const { examName, ...userData } = data
       const user = await this.prisma.user.findUnique({
         where: {
           id
@@ -98,13 +101,17 @@ export class UsersService {
         where: {
           id,
         },
-        data: { ...data },
+        data: { ...userData,
+        examName: {
+          connect: {name: examName}
+        } },
       })
       return result
     } catch (err) {
       throw new HttpException(`${err.message}`, HttpStatus.BAD_REQUEST)
     }
   }
+
   async delete(id: string){
     try {
       const user = await this.prisma.user.findUnique({

@@ -10,8 +10,7 @@ const generateUsers = async (count: number) => {
             email: faker.internet.email(),
             username: faker.person.firstName(),
             password: 'password',
-            role: Role.STUDENT,
-            examName: '100L'
+            role: Role.STUDENT
         })
     }
     console.log(users)

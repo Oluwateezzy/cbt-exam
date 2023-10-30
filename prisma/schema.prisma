@@ -15,7 +15,7 @@ model User {
   email     String     @unique
   username  String
   password  String
-  examName  String?
+  examName  Exam[]
   isCompleted Boolean @default(false)
   courses  Course[]   @relation("Enrollments")
   role      Role       @default(STUDENT)
@@ -31,6 +31,7 @@ model Exam {
   description String?
   maxScore    Int?
   courses     Course[]
+  user User[]
   startDate   DateTime
   endDate     DateTime
 }

@@ -28,6 +28,25 @@ export class AuthService {
     }
   }
 
+  async registerCourses(courses: [], id){
+    try {
+      const update = await this.prisma.user.update({
+        where: { id },
+        data: {
+          courses: {
+            connect: courses.map((course) => ({id: course}))
+          }
+        }
+      })
+      return {
+        status: HttpStatus.OK,
+        data: update
+      }
+    } catch (err) {
+      throw new HttpException(`${err.message}`, HttpStatus.BAD_REQUEST)
+    }
+  }
+
   async register(data: RegisterUserDto) {
     try {
       const {email, username, password, role, examName, courses} = data
@@ -46,9 +65,14 @@ export class AuthService {
           username,
           password,
           role,
-          examName,
+          courses: {
+            connect: courses.map((course) => ({ id: course }))
+          },
+          examName: {
+            connect: {name: exam.name}
+          }
         }
-      })
+      });
       return {
         status: HttpStatus.CREATED,
         data: user

@@ -18,6 +18,26 @@ export class CourseService {
             throw new HttpException(`${err.message}`, HttpStatus.BAD_REQUEST)
         }
     }
+
+    async getUserCourses(id){
+        try {
+            const courses = await this.prisma.course.findMany({
+                where: {
+                    students: {
+                        some: {
+                            id
+                        }
+                    }
+                }
+            })
+            return {
+                status: HttpStatus.OK,
+                data: courses
+            }
+        } catch (err) {
+            throw new HttpException(`${err.message}`, HttpStatus.BAD_REQUEST)
+        }
+    }
     async findAll() {
         try {
             const courses = await this.prisma.course.findMany({

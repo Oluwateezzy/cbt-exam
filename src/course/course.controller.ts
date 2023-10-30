@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, UseGuards, Req } from '@nestjs/common';
 import { ApiBearerAuth, ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { CourseService } from './course.service';
 import { CreateCourseDto, UpdateCourseDto } from './course.dto';
@@ -39,6 +39,15 @@ export class CourseController {
     @UseGuards(JwtAuthGuard, RoleGuard)
     async findOne(@Param('id') id: string){
         return this.courseService.findOne(id)
+    }
+
+    @Get('getUserCourses')
+    @HttpCode(HttpStatus.OK)
+    @ApiOkResponse({ description: 'Get Course' })
+    @Roles(Role.ADMIN, Role.INSTRUCTOR)
+    @UseGuards(JwtAuthGuard, RoleGuard)
+    async getUserCourses(@Req() req){
+        return this.courseService.getUserCourses(req.user.id)
     }
 
     @Put(':id')
