@@ -25,7 +25,7 @@ export class QuestionController {
 
     @Get('')
     @HttpCode(HttpStatus.OK)
-    @ApiOkResponse({ description: 'Get all Questions' })
+    @ApiOkResponse({ description: 'find all Questions' })
     @Roles(Role.ADMIN, Role.INSTRUCTOR, Role.STUDENT)
     @UseGuards(JwtAuthGuard, RoleGuard)
     async findAll() {
