@@ -25,7 +25,7 @@ export class OptionController {
 
     @Get('')
     @HttpCode(HttpStatus.OK)
-    @ApiOkResponse({ description: 'Get all Options' })
+    @ApiOkResponse({ description: 'Find all Options' })
     @Roles(Role.ADMIN)
     @UseGuards(JwtAuthGuard, RoleGuard)
     async findAll() {
